@@ -1,0 +1,271 @@
+.video-player {
+	line-height: 1;
+	font-family: sans-serif;
+
+	span, div, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+	}
+
+	button {
+		margin: 0;
+		padding: 0;
+		border: 0 none transparent;
+		background: transparent none;
+		color: inherit;
+		outline: none;
+	}
+	button:focus {
+		outline: none;
+	}
+
+	video {
+		display: block;
+		z-index: 0;
+		width: 100%;
+		max-height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	&.hide {
+		cursor: none;
+		* {
+			cursor: none;
+		}
+	}
+
+	position: relative;
+
+	&:hover {
+		.controller {
+			opacity: 1;
+		}
+	}
+
+	.spacer {
+		flex: 1 1 auto;
+	}
+
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: column;
+
+	.controller {
+		flex: 0 0 auto;
+		user-select: none;
+		opacity: 0;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 1;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		color: #fff;
+		/*background-image: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.4));*/
+		background-color: rgba(0, 0, 0, 0.5);
+		transition: opacity 0.2s linear;
+
+		&.hide {
+			opacity: 0;
+		}
+
+		&:hover, &.seeking {
+			opacity: 1;
+		}
+　
+		.button {
+			display: block;
+			font-size: 1rem;
+			width: 2rem;
+			height: 2rem;
+			cursor: pointer;
+
+			svg {
+				width: 2rem;
+				height: 2rem;
+				display: block;
+				path {
+					fill: #fff;
+				}
+			}
+		}
+
+
+
+		.seek-bar {
+			position: relative;
+			flex: 0 0 calc(100% - 1rem);
+			height: 1.5rem;
+			margin: 0 0.5rem -0.25rem 0.5rem;
+			cursor: pointer;
+
+
+			&::before {
+				content: '';
+				position: absolute;
+				width: 100%;
+				height: 0.2rem;
+				margin: 0.65rem 0;
+				border-radius: 0.1rem;
+				top: 0;
+				left: 0;
+				overflow: hidden;
+				background-color: rgba(255, 255, 255, 0.25);
+			}
+
+			.seek-bar-handle {
+				position: relative;
+				background-color: #fff;
+				height: 0.2rem;
+				margin: 0.65rem 0;
+				border-radius: 0.1rem;
+				&::after {
+					content: '';
+					position: absolute;
+					top: 0;
+					right: 0;
+					height: 0.8rem;
+					margin: -0.3rem -0.4rem;
+					border: solid #fff;
+					border-width: 0 0.4rem;
+					border-radius: 0.4rem;
+				}
+			}
+		}
+
+		.volume {
+			width: 6rem;
+			height: 2rem;
+			display: flex;
+			margin: 0 0.5rem;
+			.volume-slider {
+				position: relative;
+				height: 2rem;
+				flex: 1 1 auto;
+				cursor: pointer;
+
+				&::before {
+					content: '';
+					display: block;
+					position: absolute;
+					width: 100%;
+					height: 0.2rem;
+					margin: 0.9rem 0;
+					border-radius: 0.1rem;
+					top: 0;
+					left: 0;
+					overflow: hidden;
+					background-color: rgba(255, 255, 255, 0.25);
+				}
+
+				.volume-slider-handle {
+					position: relative;
+					background-color: #fff;
+					height: 0.2rem;
+					margin: 0.9rem 0;
+					border-radius: 0.1rem;
+
+					&::after {
+						content: '';
+						position: absolute;
+						top: 0;
+						right: 0;
+						height: 0.6rem;
+						width: 0.6rem;
+						margin: -0.2rem -0.3rem;
+						background-color: #fff;
+						border-radius: 0.3rem;
+					}
+				}
+			}
+		}
+
+		.time {
+			font-size: 0.8rem;
+			margin: 0 0.5rem;
+			cursor: default;
+
+			.divider {
+				margin: 0 0.25rem;
+			}
+		}
+
+		.fullscreen-button {
+			margin-right: 0.25rem;
+		}
+	}
+	.close-button {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		border: 0;
+		background-color: transparent;
+		margin: 1rem;
+		font-size: 2rem;
+		width: 3rem;
+		height: 3rem;
+		border-radius: 1.5rem;
+		background-color: rgba(0, 0, 0, 0.5);
+		color: #000;
+		text-align: center;
+		padding: 0.5rem;
+		line-height: 1;
+		transition: transform 0.2s ease-out;
+		&:hover {
+			transform: scale(1.1);
+		}
+		&:active {
+			transform: scale(1);
+		}
+		svg {
+			width: 2rem;
+			height: 2rem;
+			stroke: #fff;
+			stroke-width: 2;
+			transition: stroke-width 0.2s ease-out;
+			display: block;
+		}
+	}
+	.ended-close-button-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+	}
+	.ended-close-button {
+		width: 8rem;
+		height: 8rem;
+		position: relative;
+		opacity: 0;
+		animation: show 0.2s linear forwards;
+		canvas {
+			top: 0;
+			left: 0;
+			position: absolute;
+			width: 8rem;
+			height: 8rem;
+		}
+		svg {
+			width: 8rem;
+			height: 8rem;
+			display: block;
+			stroke: #fff;
+			stroke-width: 4;
+		}
+	}
+}
